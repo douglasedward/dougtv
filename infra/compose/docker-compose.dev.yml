@@ -1,0 +1,13 @@
+# Extends docker-compose.infra.yml for local development.
+# Usage: docker compose -f infra/compose/docker-compose.infra.yml \
+#                       -f infra/compose/docker-compose.dev.yml up
+services:
+  postgres:
+    environment:
+      POSTGRES_PASSWORD: dougtv
+
+  redis:
+    command: redis-server --save "" --appendonly no
+
+  nats:
+    command: ["--jetstream"]

@@ -1,0 +1,19 @@
+syntax = "proto3";
+package dougtv.moderation.v1;
+
+option go_package = "github.com/douglasedward/dougtv/packages/proto/gen/go/moderation/v1";
+
+service ModerationService {
+  rpc ClassifyMessage(ClassifyRequest) returns (ClassifyResponse);
+}
+
+message ClassifyRequest {
+  string content = 1;
+  string channel_id = 2;
+}
+
+message ClassifyResponse {
+  bool blocked = 1;
+  float toxicity_score = 2;
+  string reason = 3;
+}

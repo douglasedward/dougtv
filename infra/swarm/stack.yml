@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: dougtv
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+      POSTGRES_DB: dougtv
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    secrets:
+      - postgres_password
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    deploy:
+      replicas: 1
+
+  nats:
+    image: nats:2.10-alpine
+    command: ["--jetstream", "--store_dir=/data"]
+    volumes:
+      - nats_data:/data
+    deploy:
+      replicas: 1
+
+volumes:
+  postgres_data:
+  redis_data:
+  nats_data:
+
+secrets:
+  postgres_password:
+    external: true

@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.turbo/
+*.env
+*.env.local
+__pycache__/
+*.pyc
+.venv/
+.next/
+out/
+*.o
+*.a
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
